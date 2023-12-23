@@ -1,11 +1,11 @@
-FROM openjdk:21
-
+FROM eclipse-temurin:21-jammy
+ 
 WORKDIR /app
-
+ 
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
-RUN ./mvnw dependency:resolve
-
+RUN ./mvnw dependency:go-offline
+ 
 COPY src ./src
-
+ 
 CMD ["./mvnw", "spring-boot:run"]
