@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  url-shortener:
+    image: url-shortener
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/url_shortener
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DLL_AUTO: update
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:16-alpine3.19
+    environment:
+      POSTGRES_DB: url_shortener
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "7776:5432"
